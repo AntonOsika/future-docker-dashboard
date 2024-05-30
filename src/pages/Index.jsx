@@ -1,9 +1,10 @@
-import { Container, VStack, Box, Text, Link, Flex, Heading, Badge, useColorMode, IconButton } from "@chakra-ui/react";
+import { Container, VStack, Box, Text, Link, Flex, Heading, Badge, useColorMode, IconButton, Table, Thead, Tbody, Tr, Th, Td, TableContainer, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, Button } from "@chakra-ui/react";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { useState } from "react";
 
 const Index = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [containers, setContainers] = useState([
     {
       name: "Container 1",
@@ -31,17 +32,45 @@ const Index = () => {
           onClick={toggleColorMode}
         />
       </Flex>
-      <VStack spacing={4} align="stretch">
-        {containers.map((container, index) => (
-          <Box key={index} p={5} shadow="md" borderWidth="1px" borderRadius="md">
-            <Heading fontSize="xl">{container.name}</Heading>
-            <Text mt={4}><strong>Parameters:</strong> {container.params}</Text>
-            <Text mt={2}><strong>Running Instances:</strong> {container.runningInstances}</Text>
-            <Text mt={2}><strong>Scaler State:</strong> <Badge colorScheme={container.scalerState === "Active" ? "green" : "red"}>{container.scalerState}</Badge></Text>
-            <Link mt={2} color="teal.500" href={container.logs}>View Logs</Link>
-          </Box>
-        ))}
-      </VStack>
+      <Flex>
+        <Button onClick={onOpen} mr={4}>Account Info</Button>
+        <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader borderBottomWidth="1px">Account Information</DrawerHeader>
+            <DrawerBody>
+              <Text>Name: John Doe</Text>
+              <Text>Email: john.doe@example.com</Text>
+              <Text>Role: Admin</Text>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
+        <TableContainer flex="1">
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Name</Th>
+                <Th>Parameters</Th>
+                <Th>Logs</Th>
+                <Th>Running Instances</Th>
+                <Th>Scaler State</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {containers.map((container, index) => (
+                <Tr key={index}>
+                  <Td>{container.name}</Td>
+                  <Td>{container.params}</Td>
+                  <Td><Link color="teal.500" href={container.logs}>View Logs</Link></Td>
+                  <Td>{container.runningInstances}</Td>
+                  <Td><Badge colorScheme={container.scalerState === "Active" ? "green" : "red"}>{container.scalerState}</Badge></Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Flex>
     </Container>
   );
 };
