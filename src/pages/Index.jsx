@@ -19,6 +19,12 @@ const Index = () => {
       logs: "#",
       runningInstances: 1,
       scalerState: "Idle",
+    },    {
+      name: "Container 3",
+      params: "param1=value1 param2=value2",
+      logs: "#",
+      runningInstances: 1,
+      scalerState: "Idle",
     },
   ]);
 
