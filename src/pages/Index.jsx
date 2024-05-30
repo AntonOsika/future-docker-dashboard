@@ -19,11 +19,47 @@ const Index = () => {
       logs: "#",
       runningInstances: 1,
       scalerState: "Idle",
-    },    {
+    },
+    {
       name: "Container 3",
       params: "param1=value1 param2=value2",
       logs: "#",
       runningInstances: 1,
+      scalerState: "Idle",
+    },
+    {
+      name: "Container 4",
+      params: "param1=value1 param2=value2",
+      logs: "#",
+      runningInstances: 2,
+      scalerState: "Active",
+    },
+    {
+      name: "Container 5",
+      params: "param1=value1 param2=value2",
+      logs: "#",
+      runningInstances: 4,
+      scalerState: "Active",
+    },
+    {
+      name: "Container 6",
+      params: "param1=value1 param2=value2",
+      logs: "#",
+      runningInstances: 0,
+      scalerState: "Idle",
+    },
+    {
+      name: "Container 7",
+      params: "param1=value1 param2=value2",
+      logs: "#",
+      runningInstances: 5,
+      scalerState: "Active",
+    },
+    {
+      name: "Container 8",
+      params: "param1=value1 param2=value2",
+      logs: "#",
+      runningInstances: 2,
       scalerState: "Idle",
     },
   ]);
